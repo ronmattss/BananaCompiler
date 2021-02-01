@@ -20,5 +20,5 @@ struct Token defineToken(TokenType tType, char lexeme[],int line)
 
 char * toString()
 {
-  return " Y CAN'T READ JAVA";
+  return " Y CAN'T U READ JAVA";
 }
