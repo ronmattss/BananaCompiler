@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.cs": "csharp",
+        "tokentype.h": "c",
+        "token.h": "c"
+    }
+}
