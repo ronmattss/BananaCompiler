@@ -16,6 +16,7 @@ void assignNewString(char *oldString,char *new);
 void justPrintf(char * string);
 int readAWord(char *word);
 void ReadLexeme(char *LongLine);
+void setToken(char *word);
 char *tokens[5000];
 const char arraykw[5000][1000] = {"if", "else", "otherwise", "do", "while", "for", "switch", "case",
                               "default", "stop", "resume", "none", "Number", "Sentence", "Tralse", "Collection", "Comp", "Item", "break", "return"};
@@ -163,7 +164,7 @@ int readAWord(char *word)
    }
  }
 }
-
+//read word will be stored in a string well char[]
 void setToken(char *word)
 {
   int length = readAWord(word);
