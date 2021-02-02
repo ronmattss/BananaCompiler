@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\headers"
   ],
-  "SelectedNode": "\\main.c",
+  "SelectedNode": "\\headers\\Token.h",
   "PreviewInSolutionExplorer": false
 }

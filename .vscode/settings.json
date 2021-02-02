@@ -2,6 +2,8 @@
     "files.associations": {
         "*.cs": "csharp",
         "tokentype.h": "c",
-        "token.h": "c"
+        "token.h": "c",
+        "stdlib.h": "c",
+        "xstring": "c"
     }
 }

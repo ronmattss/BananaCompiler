@@ -47,6 +47,8 @@ typedef enum
 } TokenType;
 
 
+
+
 int tokenValue(TokenType token)
 {
 printf("%d",token);
