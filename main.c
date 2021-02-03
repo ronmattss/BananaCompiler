@@ -11,7 +11,9 @@ int main()
  //   printf("%s",toString());
 char *ptrTest = malloc(SIZE_OF_LINE * sizeof *ptrTest);
 
-ReadLexeme("Hello$!$$$$$$$$$$T");
+printf("wtf\n");
+ReadLexeme("Number ABCDEFGHIJKLMNuweihfuiwefuwiegfuiwegfeuwigfOPRSTUVWXYZ gago bakit ganon;");
+
  //stringSplitter("HELLO WORLD",ptrTest);
 
 //assignNewString(ptrTest,ptrTest);
