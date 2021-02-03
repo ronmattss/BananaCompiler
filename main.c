@@ -11,7 +11,7 @@ int main()
  //   printf("%s",toString());
 char *ptrTest = malloc(SIZE_OF_LINE * sizeof *ptrTest);
 
-ReadLexeme("Hello World");
+ReadLexeme("Hello$!$$$$$$$$$$T");
  //stringSplitter("HELLO WORLD",ptrTest);
 
 //assignNewString(ptrTest,ptrTest);

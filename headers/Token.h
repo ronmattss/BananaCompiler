@@ -136,28 +136,30 @@ void justPrintf(char * string)
 //Read a sentence
 void ReadLexeme(char *LongLine)
 {
+  /* uncomment for debugging
  printf("Reading LongLine: \n");
  printf(" %s \n",LongLine);
  printf("\n wordSize: %d \n",readAWord(LongLine));
  //printf(" character at 4: %c \n",LongLine[5]);
  printf("Word: \n");
-
+*/
+// there should be a while loop here for to 
  setToken(LongLine);
-printf(" %s ",tokens[0]);
+ printf(" %s ",tokens[0]);
 char c = LongLine[lexemeCounter];
 
 }
 
 
 
-//read a character until whitespace or delimiter
+//read a character until whitespace or delimiter or symbols
 int readAWord(char *word)
 {
  for(int i=0; i<strlen(word);i++)
  {
    char c = word[i];
 
-   if( c == ' ')
+   if( c == ' '||c=='!') // change to list of delimiters 
    {
      //printf("Space\n");
      return i;
@@ -175,7 +177,7 @@ for(int i=0; i<length;i++)
   c = word[i];
 strncat(token,&c,1);
 }
-tokens[0] = token;
+tokens[0] = token; // compare to tokens 
 }
 
 
