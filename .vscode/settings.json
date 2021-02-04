@@ -4,6 +4,7 @@
         "tokentype.h": "c",
         "token.h": "c",
         "stdlib.h": "c",
-        "xstring": "c"
+        "xstring": "c",
+        "stdio.h": "c"
     }
 }

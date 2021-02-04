@@ -3,21 +3,22 @@
 #include "headers/Token.h"
 int SIZE_OF_LINE = 1000;
 int main()
-{// bananalyzer entry point
-// read file per line
-//
-//checkCharacters("HELLO WORLD");
+{ // bananalyzer entry point
+    // read file per line
+    //
+    //checkCharacters("HELLO WORLD");
     //checkCharacters("AB123 Escape");
- //   printf("%s",toString());
-char *ptrTest = malloc(SIZE_OF_LINE * sizeof *ptrTest);
+    //   printf("%s",toString());
+    char *ptrTest = malloc(SIZE_OF_LINE * sizeof *ptrTest);
 
-printf("wtf\n");
-ReadLexeme("Number ABCDEFGHIJKLMNuweihfuiwefuwiegfuiwegfeuwigfOPRSTUVWXYZ gago bakit ganon;");
+    printf("wtf\n");
+    matchWithKeywords("Number");
+    ReadLexeme("Number one = 23.1;");
 
- //stringSplitter("HELLO WORLD",ptrTest);
+    //stringSplitter("HELLO WORLD",ptrTest);
 
-//assignNewString(ptrTest,ptrTest);
+    //assignNewString(ptrTest,ptrTest);
 
- //free(ptrTest);
+    //free(ptrTest);
     return 0;
 }

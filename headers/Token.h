@@ -18,13 +18,18 @@ void justPrintf(char *string);
 int readAWord(char *word);
 void ReadLexeme(char *LongLine);
 void setToken(char *word);
+bool matchWithKeywords(char *token);
+bool matchWithOperators(char *token);
+void tokenMatcher(char *token);
 char **tokens;
-const char *arraykw[20] = {"if", "else", "otherwise", "do", "while", "for", "switch", "case",
-                                  "default", "stop", "resume", "none", "Number", "Sentence", "Tralse", "Collection", "Comp", "Item", "break", "return"};
-
+const int numberOfOperators = 15;
+const char *keywords[20] = {"if", "else", "otherwise", "do", "while", "for", "switch", "case",
+                            "default", "stop", "resume", "none", "Number", "Sentence", "Tralse", "Collection", "Comp", "Item", "break", "return"};
+const char *operators[15] = {"+", "-", "*", "/", "!", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", ";"}; // do something about the backslash
 const int MAXIMUM_TOKENS = 5000;
 int lexemeCounter = 0;
 int spaceCounter = 0; // index of last space
+bool isLineFinished = false;
 
 bool isDelimiter(char ch)
 {
@@ -50,7 +55,6 @@ bool isAlphabet(char ch)
 
   if (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z')
   {
-    //  printf("%c  character is Alphabet: True", ch);
     return true;
   }
   return false;
@@ -66,86 +70,160 @@ bool isNumeric(char ch)
   return false;
 }
 
-void checkCharacters(char *string)
-{
-  //String init
-  int length = strlen(string);
-  char *lexeme;
-  lexeme = (char *)malloc(sizeof(char) * length);
-
-  strcpy(lexeme, string);
-  char *newString = (char *)malloc(sizeof(char) * 255);
-
-  //split(&newString,lexeme);
-
-  //strcpy(&newString,split(lexeme));
-  printf("%d\n", strlen(newString));
-  printf("%s\n", newString);
-  for (int i = 0; i < length; i++)
-  {
-    char c = newString[i];
-    printf("%c\n", c);
-    characterChecker(c);
-  }
-  stringSplitter(lexeme, newString);
-}
-
 //&toBeSplitted[i] to access individual character
 
 // Split via whitespace
 
-void assignNewString(char *oldString, char *new)
+bool matchWithKeywords(char *token)
 {
-  int length = strlen(oldString);
-  int counter = 0;
-  char *newString = malloc(countNonWhiteSpaceInString(oldString));
-  char c;
-  newString[0] = 0;
-  for (int i = 0; i < length; i++)
+  // printf("Token: %s", token);
+  bool flag = false;
+
+  // ~~~~~ Matches token to a Keyword
+  for (int i = 0; i < 20; i++)
   {
-    c = oldString[i];
-    if (characterChecker(c))
+
+    if (strlen(keywords[i]) == strlen(token))
     {
-      printf("%c", c);
-      strncat(newString, &c, 1);
-      counter++;
+      for (int j = 0; j < strlen(keywords[i]); j++)
+      {
+        if (token[j] != keywords[i][j])
+        {
+          flag = false;
+          continue;
+        }
+        else if (token[j] == keywords[i][j])
+        {
+
+          flag = true;
+        }
+      }
+      if (flag)
+      {
+        //printf("\nKeyword: %s ", keywords[i]);
+        return flag;
+      }
     }
   }
-  justPrintf(newString);
-}
-void justPrintf(char *string)
-{
-  printf("Just Print: %s\n", string);
-  printf("Just Print Length: %zu", strlen(string));
+  return flag;
+  // check if operator
+  // check if delimiter
+  // check if variable Name
 }
 
+bool matchWithOperators(char *token)
+{
+  bool flag = false;
+
+  // ~~~~~ Matches token to a Keyword
+  for (int i = 0; i < numberOfOperators; i++)
+  {
+
+    if (strlen(operators[i]) == strlen(token))
+    {
+      for (int j = 0; j < strlen(operators[i]); j++)
+      {
+        if (token[j] != operators[i][j])
+        {
+          flag = false;
+          continue;
+        }
+        else if (token[j] == operators[i][j])
+        {
+
+          flag = true;
+        }
+      }
+      if (flag)
+      {
+        //printf("\nKeyword: %s ", keywords[i]);
+        return flag;
+      }
+    }
+  }
+  return flag;
+}
+
+bool matchIfNumber(char *token)
+{
+  bool hasPeriod = false;
+  bool flag = false;
+  char c;
+  for (int i = 0; i < strlen(token); i++)
+  {
+    c = token[i];
+    if (isNumeric(c))
+    {
+      flag = true;
+    }
+    else
+    {
+      flag = false;
+      if (c = '.' && !hasPeriod)
+      {
+        hasPeriod = true;
+      }
+      else
+      {
+        return false; //
+      }
+    }
+  }
+  return true;
+}
+
+void tokenMatcher(char *token)
+{
+  if (matchWithOperators(token))
+  {
+    printf(" Token is an Operator\n");
+    return;
+  }
+
+  if (matchIfNumber(token))
+  {
+    printf("\nToken is a Number\n");
+    return;
+  }
+  if (matchWithKeywords(token))
+  {
+    printf("\nToken is a Keyword\n");
+    return;
+  }
+  else
+  {
+    printf("\nToken is a variableName\n");
+    return;
+  }
+}
 //Read a sentence
 void ReadLexeme(char *LongLine)
 {
   allocateTokenArray();
-  /* uncomment for debugging
- printf("Reading LongLine: \n");
- printf(" %s \n",LongLine);
- printf("\n wordSize: %d \n",readAWord(LongLine));
- //printf(" character at 4: %c \n",LongLine[5]);
- printf("Word: \n");
-*/
 
   // there should be a while loop here for to
   int counter = 0;
-  while(counter<5)
+  while (!isLineFinished)
   {
-  setToken(LongLine);  
-  counter++;
+    setToken(LongLine);
+    counter++;
   }
-  for(int i = 0; i <lexemeCounter;i++)
+  printf("\n%s",LongLine);
+  for (int i = 0; i < lexemeCounter; i++)
   {
-    printf("token[%d] %s\n",i,tokens[i]);
+    printf("\ntoken[%d] %s ", i, tokens[i]);
+    tokenMatcher(tokens[i]);
   }
-  // printf(" %s ",tokens[0]);
   char c = LongLine[lexemeCounter];
   free(tokens);
 }
+
+/*
+if;
+012
+if
+;
+*/
 
 //read a character until whitespace or delimiter or symbols
 int readAWord(char *word)
@@ -155,50 +233,72 @@ int readAWord(char *word)
   for (int i = spaceCounter; i < strlen(word); i++)
   {
     char c = word[i];
-
-    if (c == ' ' || c == ';') // change to list of delimiters
+    if (word[i + 1] == ' ' || word[i + 1] == ';') // if delimiter is the next character return the
     {
-      //printf("Space\n");
-       // last space counter then next word 7
-      return internalCounter; // for null terminator
+      return internalCounter;
+    }
+    if (c == ' ' || c == ';' || c == '\0') // change to list of delimiters
+    {
+      if (word[i + 1] == ' ' && c == ' ') // peek
+      {
+        internalCounter++;
+        continue;
+      }
+      else if (c == ' ')
+      {
+        internalCounter++;
+        continue;
+      }
+      else
+      {
+        //printf("Space\n");
+        if (i + 1 == strlen(word)) // this means that it is the end of the line
+        {
+          isLineFinished = true;
+          return internalCounter; // for null terminator
+        }
+        return internalCounter; // for null terminator
+      }
     }
     internalCounter++;
   }
 }
-//read word will be stored in a string well char[]
+
+//read word will be stored in a char[]
 void setToken(char *word)
 {
-  int tokenLength = readAWord(word);
+  int tokenLength = readAWord(word) + 1;
   int internalCounter = 0;
-  int startCharacter =spaceCounter;
+  int startCharacter = spaceCounter;
   printf("\n length: %d\n", tokenLength);
 
   char c;
-  char *token = malloc(tokenLength +1 * sizeof(char *));
+  char *token = malloc(tokenLength + 1 * sizeof(char *));
 
   for (int i = 0; i < tokenLength; i++)
   {
     c = word[startCharacter + i];
-    if(c == ' ')
+    if (c == ' ')
     {
-    continue;
+      continue;
     }
-    else {
-    token[internalCounter] = c;
-    printf("%c %c\n", c, token[internalCounter]);
-    internalCounter++;
+    else
+    {
+      token[internalCounter] = c;
+      printf("%c %c\n", c, token[internalCounter]);
+      internalCounter++;
     }
   }
   token[internalCounter] = '\0'; // add null terminator
 
-// Assignment Part;
-  tokens[lexemeCounter] = malloc(tokenLength +1 * sizeof(tokens[lexemeCounter]));
-  memcpy(tokens[lexemeCounter], token, strlen(token)+1);
-  printf_s("Token: %s %s\n", tokens[lexemeCounter],token);
+  // Assignment Part;
+  tokens[lexemeCounter] = malloc(tokenLength + 1 * sizeof(tokens[lexemeCounter]));
+  memcpy(tokens[lexemeCounter], token, strlen(token) + 1);
+  printf_s("Token: %s %s\n", tokens[lexemeCounter], token);
 
   free(token);
- spaceCounter += tokenLength +1; // goes to the next word
- lexemeCounter++;
+  spaceCounter += tokenLength; // goes to the next word
+  lexemeCounter++;
 }
 
 void allocateTokenArray()
