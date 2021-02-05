@@ -25,12 +25,21 @@ char **tokens;
 const int numberOfOperators = 15;
 const char *keywords[20] = {"if", "else", "otherwise", "do", "while", "for", "switch", "case",
                             "default", "stop", "resume", "none", "Number", "Sentence", "Tralse", "Collection", "Comp", "Item", "break", "return"};
+const int keywordID[20] = {1, 1, 1, 2, 2, 2};
 const char *operators[15] = {"+", "-", "*", "/", "!", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", ";"}; // do something about the backslash
+
 const int MAXIMUM_TOKENS = 5000;
 int lexemeCounter = 0;
 int spaceCounter = 0; // index of last space
 bool isLineFinished = false;
 
+/*void keywordType(char *token)
+{
+  switch(token)
+  {
+    case 
+  }
+}*/
 bool isDelimiter(char ch)
 {
   if (ch == ' ' || ch == '+' || ch == '-' || ch == '*' ||
@@ -200,30 +209,20 @@ void tokenMatcher(char *token)
 void ReadLexeme(char *LongLine)
 {
   allocateTokenArray();
-
+  printf("\n%s", LongLine);
   // there should be a while loop here for to
-  int counter = 0;
   while (!isLineFinished)
   {
     setToken(LongLine);
-    counter++;
   }
-  printf("\n%s",LongLine);
+
   for (int i = 0; i < lexemeCounter; i++)
   {
     printf("\ntoken[%d] %s ", i, tokens[i]);
     tokenMatcher(tokens[i]);
   }
-  char c = LongLine[lexemeCounter];
   free(tokens);
 }
-
-/*
-if;
-012
-if
-;
-*/
 
 //read a character until whitespace or delimiter or symbols
 int readAWord(char *word)
@@ -233,6 +232,7 @@ int readAWord(char *word)
   for (int i = spaceCounter; i < strlen(word); i++)
   {
     char c = word[i];
+  
     if (word[i + 1] == ' ' || word[i + 1] == ';') // if delimiter is the next character return the
     {
       return internalCounter;
@@ -257,6 +257,11 @@ int readAWord(char *word)
           isLineFinished = true;
           return internalCounter; // for null terminator
         }
+        if(c ==';')
+        {
+            isLineFinished = true;
+          return internalCounter+1; 
+        }
         return internalCounter; // for null terminator
       }
     }
@@ -267,7 +272,10 @@ int readAWord(char *word)
 //read word will be stored in a char[]
 void setToken(char *word)
 {
-  int tokenLength = readAWord(word) + 1;
+  int length = readAWord(word);
+  if (length == 0)
+    return;
+  int tokenLength = length + 1;
   int internalCounter = 0;
   int startCharacter = spaceCounter;
   printf("\n length: %d\n", tokenLength);
@@ -278,7 +286,7 @@ void setToken(char *word)
   for (int i = 0; i < tokenLength; i++)
   {
     c = word[startCharacter + i];
-    if (c == ' ')
+    if (c == ' '||c=='\n')
     {
       continue;
     }
@@ -389,8 +397,3 @@ bool characterChecker(char ch)
 // given a string
 // check if string is AlphaNumeric
 // split each string when a white space is encountered
-
-char *toString()
-{
-  return " Y CAN'T U READ JAVA";
-}

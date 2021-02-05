@@ -5,6 +5,7 @@
         "token.h": "c",
         "stdlib.h": "c",
         "xstring": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "system_error": "c"
     }
 }
