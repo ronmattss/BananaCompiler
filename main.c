@@ -20,7 +20,7 @@ int main()
     //checkCharacters("AB123 Escape");
     //   printf("%s",toString());
     readSource();
-
+//TODO: Cleanup
     printf("Lexeme      Token");
     tokens = malloc(MAXIMUM_TOKENS * sizeof(char));
     for (int i = 0; i < numberOfLines; i++)
