@@ -10,11 +10,6 @@ void checkCharacters(char *string);
 //void splitLexemes(char *c);
 char *getString(char *string);
 //void split(char **target,char *from);
-void stringSplitter(char *toBeSplitted, char *destination);
-void reallocateString(char *string, int size);
-int countNonWhiteSpaceInString(char *string);
-void assignNewString(char *oldString, char *new);
-void justPrintf(char *string);
 int readAWord(char *word);
 void ReadLexeme(char *LongLine);
 void setToken(char *word);
@@ -30,7 +25,8 @@ void showLexemes();
 char **tokens;
 const int numberOfOperators = 15;
 const int keywordsLength = 24;
-// ~~ Pool Of Keywords Used in Character Matching ~~
+// ~~ Pool Of Keywords Used in per-Character Matching ~~
+// reduced code length, ONLY USED IN PER-CHARACTER-MATCHING 
 const char *keywords[24] = {"if", "else", "otherwise", "do", "while", "for", "switch", "case",
                             "default", "stop", "resume", "none", "Number", "Sentence", "Tralse", "Collection", "Comp", "Item", "return", "AND", "OR", "NOT", "true", "false"};
 const int keywordID[24] = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6, 6, 6, 6, 6, 6, 7, 8, 8, 8, 12, 12};
@@ -46,9 +42,40 @@ int *tokensID;
 FILE *wf;
 FILE *fp;
 
+/*
+FSA  implementation
+All Matching Algorithms are found in region Main Matcher
+The Array of Keywords represents the FSA implementation of the analyzer
+The length of each Keywords represents the length of each FSA
+instead of creating a bunch of if statements (which is not good in practice)
+Keywords are stored in a **char and it is only used in a manual character per character matching 
+against a input lexeme.
+Simulating a Deterministic Finite Automaton
+
+An input string: else 
+the algorithm of matchWithKeyword() function simulates an input token moving through each state:
+where each character of the Keyword represents a state.
+psuedocode:
+>find appropriate State machine for the given input token (based on input length)
+>if an appropriate State machine is found Match each Character of the input and the state 
+Example Keyword/State Machine: case
+Example input e
+is Matched against state c... recursive until rejected or accepted
+e c rejected 
+>if rejected
+>find another appropriate State machine 
+Next State Machine: else
+e e
+l l
+s s
+e e
+accepted
+> if accepted return to previous function to get next input
+> if all statemachines are tested and all are rejects the input then, it is thrown to 
+another set of state machines*/
+#pragma region Main Matcher
 bool keywordType()
 {
-
 printf("%d",tokensID[tokenIDCounter]);
   switch (tokensID[tokenIDCounter])
   {
@@ -220,7 +247,7 @@ bool isOperator(char ch)
     return (true);
   return (false);
 }
-
+#pragma endregion
 // --Compares the given character to it's ascii value--
 bool isAlphabet(char ch)
 {
@@ -245,6 +272,7 @@ bool isNumeric(char ch)
 //&toBeSplitted[i] to access individual character
 
 // Split via whitespace
+// Might be edited for Automata :<
 bool manualMatching(char *c)
 {
   //Manual Matching
@@ -292,9 +320,6 @@ bool matchWithKeywords(char *token)
     }
   }
   return flag;
-  // check if operator
-  // check if delimiter
-  // check if variable Name
 }
 
 bool matchWithOperators(char *token)
@@ -408,29 +433,16 @@ void tokenMatcher(char *token)
 //Read a sentence
 void ReadLexeme(char *LongLine)
 {
-  //allocateTokenArray();
-  // tokens = malloc(MAXIMUM_TOKENS * sizeof(char));
   // printf("\n%s", LongLine);
-  // there should be a while loop here for to
   while (!isLineFinished)
   {
     setToken(LongLine);
   }
 
-  // allocate tokenID
+  // allocate tokenID Array
   tokensID = malloc(lexemeCounter * sizeof(tokensID));
-  // set TokenId to Lexeme ID
-
-  // for (int i = 0; i < lexemeCounter; i++)
-  // {
-  //   printf("\n %s | ",tokens[i]);
-  //   tokenIDCounter = i;
-  //   tokenMatcher(tokens[i]);
-  // }
-  //  free(tokens);
   isLineFinished = false;
   spaceCounter = 0;
-  // lexemeCounter = 0;
 }
 void showLexemes()
 {
@@ -452,11 +464,8 @@ void showLexemes()
   fclose(wf);
 }
 
-void writeTokensAndLexemes()
-{
-}
 
-//read a character until whitespace or delimiter or symbols
+//read a character until whitespace or delimiter
 int readAWord(char *word)
 {
   // printf("SpaceCOunter: %d", spaceCounter);
@@ -536,6 +545,7 @@ int readAWord(char *word)
   }
 }
 
+// This function is responsible for splitting each lexeme and storing it in an array
 //read word will be stored in a char[]
 void setToken(char *word)
 {
@@ -584,27 +594,6 @@ void setToken(char *word)
   spaceCounter += tokenLength; // goes to the next word
   lexemeCounter++;
   totalLexemes++;
-}
-
-void allocateTokenArray()
-{
-  tokens = malloc(MAXIMUM_TOKENS * sizeof(char));
-}
-
-bool characterChecker(char ch)
-{
-  if (isAlphabet(ch))
-  {
-    return true;
-  }
-  else if (isNumeric(ch))
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
 }
 
 // given a string
