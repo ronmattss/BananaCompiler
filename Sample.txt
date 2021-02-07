@@ -1,15 +1,10 @@
-Number xyz = 230.213;
-1234567890
-[
-]
+Number sample = 23.123;
+Collection[Number] Samples = {2,3,4,5,6,7};
+if(1 == 1)
 {
+    return true;
 }
--
-+
-=
->
-<
-<=
->=
-!=
-!
+else
+{
+    return false;
+}

@@ -6,7 +6,9 @@
 void readSource();
 int SIZE_OF_LINE = 1000;
 int bufferLength = 255;
+int numberOfLines = 0;
 char filename[250];
+char outFile[250];
 char *ch;
 char **stringOfLine;
 
@@ -18,28 +20,31 @@ int main()
     //checkCharacters("AB123 Escape");
     //   printf("%s",toString());
     readSource();
-    char *ptrTest = malloc((strlen(stringOfLine[0]) + 1) * sizeof *ptrTest);
-    strcpy(ptrTest, stringOfLine[0]);
-    // printf("wtf\n");
-//     matchWithKeywords(stringOfLine[0]);
-    printf("\nfirst String: %s ", ptrTest);
-    ReadLexeme(ptrTest);
 
-    //stringSplitter("HELLO WORLD",ptrTest);
-
-    //assignNewString(ptrTest,ptrTest);
-
-    //free(ptrTest);
+    printf("Lexeme      Token");
+    tokens = malloc(MAXIMUM_TOKENS * sizeof(char));
+    for (int i = 0; i < numberOfLines; i++)
+    {
+        char *ptrTest = malloc((strlen(stringOfLine[i]) + 1) * sizeof *ptrTest);
+        strcpy(ptrTest, stringOfLine[i]);
+        //  printf("\nfirst String: %s ", ptrTest);
+        ReadLexeme(ptrTest);
+        free(ptrTest);
+    }
+    showLexemes();
+    free(tokens);
+    fclose(wf);
     return 0;
 }
 
 void readSource()
 {
-    FILE *fp;
+
     int counter = 0;
 
     stringOfLine = malloc(SIZE_OF_LINE * sizeof(char *));
     ch = malloc(SIZE_OF_LINE * sizeof(ch));
+
     printf("Enter the Filename you want to read:\n");
     gets(filename);
 
@@ -59,28 +64,12 @@ void readSource()
             stringOfLine[counter] = malloc(strlen(ch) + 1 * sizeof(stringOfLine[counter]));
             strcpy(stringOfLine[counter], ch);
             //strcat(stringOfLine[counter],'\0');
-            printf(" [%d][%d] %s", counter, strlen(stringOfLine[counter]), stringOfLine[counter]);
+            //      printf(" [%d][%d] %s", counter, strlen(stringOfLine[counter]), stringOfLine[counter]);
             // ReadLexeme(ch);
             counter++;
         }
-        // ch[counter] = '\0';
-        //  tokens[lexemeCounter] = malloc(tokenLength + 1 * sizeof(tokens[lexemeCounter]));
-        // while ((fgets(ch,1000,fp)) != NULL)
-        // {
-        //     if(ch[counter] =='\n')
-        //     {
-        //         printf("\nNew line Encountered");
-        //     }
-        //     else
-        //     {
-        //     strcpy(stringOfLine,ch);
-        //     }
-        //     printf("%c", ch);
-        //     counter++;
-        // }
-        // stringOfLine[counter] = '\0';
-        //printf("\n %s",stringOfLine);
-        printf("\n Number of lines: %d", counter);
+        numberOfLines = counter;
+        //    printf("\n Number of lines: %d", counter);
     }
 
     fclose(fp);
