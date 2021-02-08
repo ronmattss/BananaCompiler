@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <conio.h>
-#include "headers/TokenType.h"
 #include "headers/Token.h"
 
 void readSource();
@@ -13,21 +12,19 @@ char *ch;
 char **stringOfLine;
 
 int main()
-{ // bananalyzer entry point
-    // read file per line
-    //
-    //checkCharacters("HELLO WORLD");
-    //checkCharacters("AB123 Escape");
-    //   printf("%s",toString());
+{
+
     readSource();
-//TODO: Cleanup
+    //TODO: Cleanup
     printf("Lexeme      Token");
     tokens = malloc(MAXIMUM_TOKENS * sizeof(char));
     for (int i = 0; i < numberOfLines; i++)
     {
         char *ptrTest = malloc((strlen(stringOfLine[i]) + 1) * sizeof *ptrTest);
         strcpy(ptrTest, stringOfLine[i]);
-        //  printf("\nfirst String: %s ", ptrTest);
+        // printf("\nfirst String: %s ", ptrTest);     // debug test what string
+        if(ptrTest[0] == '\n')
+        continue;
         ReadLexeme(ptrTest);
         free(ptrTest);
     }
@@ -37,6 +34,7 @@ int main()
     return 0;
 }
 
+// Read all strings and store it in a **char
 void readSource()
 {
 
@@ -47,8 +45,19 @@ void readSource()
 
     printf("Enter the Filename you want to read:\n");
     gets(filename);
-
-    fp = fopen(filename, "r");
+    int fileNameLength = strlen(filename);
+    if (filename[fileNameLength - 4] == '.')
+    {
+        if (filename[fileNameLength - 3] == 'c')
+            if (filename[fileNameLength - 2] == 'm')
+                if (filename[fileNameLength - 1] == 'p')
+                    fp = fopen(filename, "r");
+    }
+    else
+    {
+        printf("file not found");
+        exit(0);
+    }
 
     if (fp == NULL)
     {
@@ -59,13 +68,8 @@ void readSource()
 
         while (fgets(ch, bufferLength, fp))
         {
-
-            // printf("%s \n",ch);
             stringOfLine[counter] = malloc(strlen(ch) + 1 * sizeof(stringOfLine[counter]));
             strcpy(stringOfLine[counter], ch);
-            //strcat(stringOfLine[counter],'\0');
-            //      printf(" [%d][%d] %s", counter, strlen(stringOfLine[counter]), stringOfLine[counter]);
-            // ReadLexeme(ch);
             counter++;
         }
         numberOfLines = counter;

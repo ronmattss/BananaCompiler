@@ -1,0 +1,2 @@
+if (filename[fileNameLength - 1] == 'c')
+                fp = fopen(filename, "r");
