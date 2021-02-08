@@ -30,7 +30,7 @@ const int keywordsLength = 29;
 const char *keywords[29] = {"if", "else", "otherwise", "do", "while", "for", "switch", "case",
                             "default", "stop", "resume", "none", "Number", "Sentence", "Tralse", "Collection", "Comp",
                             "Item", "return", "AND", "OR", "NOT", "true", "false", "pi", "int32", "euler", "kelvin", "then"};
-const int keywordID[29] = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6, 6, 6, 6, 6, 6, 7, 8, 8, 8, 12, 13, 14, 15, 16, 17, 18};
+const int keywordID[29] = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6, 6, 6, 6, 6, 6, 7, 8, 8, 8, 12, 13, 14, 15, 16, 17, 18}; // for printing purposes
 //const char *operators[21] = {"+", "-", "*", "/", "!", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", ";", "[", "]", "(", ")", "{", "}"}; // do something about the backslash
 //const int operatorID[21] = {9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11};
 
@@ -132,7 +132,7 @@ bool keywordType()
   }
 }
 // give tokens some ID for future use :>
-bool matchIfArithmeticOperator(char *token)
+bool matchIfArithmeticOperator(char *token) // All Arithmetic Operator Used
 {
   char c = token[0];
   switch (c)
@@ -166,6 +166,9 @@ bool matchIfArithmeticOperator(char *token)
   case '*':
     fprintf(wf, "Arithmetic Operator: Multiply");
     return true;
+  case '%':
+    fprintf(wf, "Arithmetic Operator: Modulo");
+    return true;
   case '/': // how to know if comment or not, later
     if (token[1] == '/')
     {
@@ -178,7 +181,7 @@ bool matchIfArithmeticOperator(char *token)
     return false;
   }
 }
-bool matchIfRelationalOperator(char *token)
+bool matchIfRelationalOperator(char *token) // All Conditional Symbols Used (AND NOT OR is stored in Keywords)
 {
   char c = token[0];
   switch (c)
@@ -197,8 +200,12 @@ bool matchIfRelationalOperator(char *token)
       fprintf(wf, "Relational Operator: not equals to");
       return true;
     }
-    fprintf(wf, "Relational Operator: not");
-    return true;
+    if (token[1] == '\0')
+    {
+      fprintf(wf, "Relational Operator: not");
+      return true;
+    }
+    return false;
   case '>':
     if (token[1] == '=')
     {
@@ -218,7 +225,7 @@ bool matchIfRelationalOperator(char *token)
   }
   return false;
 }
-bool matchIfSentence(char *token)
+bool matchIfSentence(char *token) // Matches if current lexeme is a sentence with ""
 {
   char c = token[0];
   int counter = 0;
@@ -236,7 +243,7 @@ bool matchIfSentence(char *token)
   }
   return false;
 }
-bool matchIfDelimiter(char *token)
+bool matchIfDelimiter(char *token) // All Delimiters Used
 {
   char c = token[0];
   switch (c)
@@ -268,23 +275,23 @@ bool matchIfDelimiter(char *token)
   }
   return false;
 }
-bool isDelimiter(char ch)
+bool isDelimiter(char ch) // Checks all Delimiters used in reading in a conditional statement
 {
   if (ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == ';' || ch == ',' || ch == '.')
     return (true);
   return (false);
 }
 
-bool isOperator(char ch)
+bool isOperator(char ch) // Checks all Operators in a conditional Statement
 {
   if (ch == '+' || ch == '-' || ch == '*' ||
       ch == '/' || ch == '>' || ch == '<' ||
-      ch == '=')
+      ch == '=' || ch == '%')
     return (true);
   return (false);
 }
 // --Compares the given character to it's ascii value--
-bool isAlphabet(char ch)
+bool isAlphabet(char ch) // Checks if current character is an alphabet via ASCII Value
 {
 
   if (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z')
@@ -293,7 +300,7 @@ bool isAlphabet(char ch)
   }
   return false;
 }
-bool isNumeric(char ch)
+bool isNumeric(char ch) // Checks if current character is a digit via ASCII Value
 {
   if (ch >= '0' && ch <= '9')
   {
@@ -316,9 +323,8 @@ bool manualMatching(char *c)
         if (c[3] == 'e')
           return true;
 }
-bool matchWithKeywords(char *token)
-{
-  // printf("Token: %s", token);
+bool matchWithKeywords(char *token) // Matches given input against a keyword, Matches each character one by one until rejected or accepted
+{                                   // printf("Token: %s", token);
   bool flag = false;
 
   // ~~~~~ Matches token to a Keyword per character
@@ -383,39 +389,63 @@ bool matchWithKeywords(char *token)
   return flag;
 }
 */
-bool matchIfNumber(char *token)
+bool matchIfNumber(char *token) // Matches given input character one by one if it is an accepted numerical value
 {
   bool hasPeriod = false;
   bool flag = false;
   char c;
-  for (int i = 0; i < strlen(token); i++)
+  for (int i = 1; i < strlen(token); i++)
   {
     c = token[i];
-    if (isNumeric(c))
-    {
-      flag = true;
-    }
-    else
-    {
-      flag = false;
-      if (c = '.' && !hasPeriod && strlen(token) > 2)
+    if (token[0] == '-' || isNumeric(token[0]))
+      if (isNumeric(c))
       {
-        hasPeriod = true;
+        flag = true;
       }
       else
       {
-        return false; //
+        flag = false;
+        if (c = '.' && !hasPeriod && strlen(token) > 2)
+        {
+          hasPeriod = true;
+        }
+        else
+        {
+          return false; //
+        }
       }
-    }
   }
   return flag;
 }
-bool matchiIfVariableName(char *token)
+bool matchiIfVariableName(char *token) // Matches given input character one by one if it is a valid variableName
 {
   char c = token[0];
-  if (isAlphabet(c))
+  bool flag = false;
+  if (strlen(token) == 1 && isAlphabet(c))
+  {
     return true;
-  return false;
+  }
+  for (int i = 1; i < strlen(token); i++)
+  {
+    c = token[i];
+    if (isAlphabet(token[0]))
+    {
+      flag = true;
+      if (isAlphabet(c) || isNumeric(c) || '_')
+      {
+        flag = true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else
+    {
+      return false;
+    }
+  }
+  return flag;
 }
 void tokenMatcher(char *token)
 {
@@ -556,7 +586,6 @@ void setToken(char *word)
   lexemeCounter++;
 }
 
-
 // This Function is responsible for accurately splitting each lexeme into pieces
 // returns a length based on the given Line;
 //read a character until whitespace or special delimiters
@@ -613,6 +642,12 @@ int readAWord(char *word)
     {
       isLineFinished = true;
       return internalCounter;
+    }
+    else if (isNumeric(c) && word[i + 1] == '.') //---2
+    {
+      internalCounter += 2;
+      i++;
+      continue;
     }
     else if ((isOperator(word[i + 1]) || isDelimiter(word[i + 1])) && (isAlphabet(c) || isNumeric(c))) // if next character is a delimiter
     {

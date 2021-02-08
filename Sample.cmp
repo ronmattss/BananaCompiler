@@ -1,2 +1,1 @@
-if (filename[fileNameLength - 1] == 'c')
-                fp = fopen(filename, "r");
+Collection[Sentence] collections = {"asdasdsa","asdasd da","213 123","qweqwe",};

@@ -1,21 +1,18 @@
 Lexeme							Token
-if 						Conditional
-( 						Delimiter: open parenthesis
-filename 						variableName
+Collection 						Data Type
 [ 						Delimiter: open square bracket
-fileNameLength 						variableName
-- 						Arithmetic Operator: Subtraction
-1 						Number
+Sentence 						Data Type
 ] 						Delimiter: close square bracket
-== 						Relational Operator: equals to
-'c' 						Undefined Symbol
-) 						Delimiter: close parenthesis
-fp 						variableName
+collections 						variableName
 = 						Relational Operator: assignment operator
-fopen 						variableName
-( 						Delimiter: open parenthesis
-filename 						variableName
+{ 						Delimiter: open curly bracket
+"asdasdsa" 						Sentence
 , 						Delimiter: comma
-"r" 						Sentence
-) 						Delimiter: close parenthesis
+"asdasd da" 						Sentence
+, 						Delimiter: comma
+"213 123" 						Sentence
+, 						Delimiter: comma
+"qweqwe" 						Sentence
+, 						Delimiter: comma
+} 						Delimiter: close curly bracket
 ; 						Delimiter: semicolon
