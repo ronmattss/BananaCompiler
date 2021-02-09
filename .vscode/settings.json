@@ -6,6 +6,9 @@
         "stdlib.h": "c",
         "xstring": "c",
         "stdio.h": "c",
-        "system_error": "c"
+        "system_error": "c",
+        "initializer_list": "c",
+        "type_traits": "c",
+        "xutility": "c"
     }
 }

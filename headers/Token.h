@@ -44,37 +44,6 @@ int *tokensID;
 FILE *wf;
 FILE *fp;
 
-/*
-FSA  implementation
-All Matching Algorithms are found in region Main Matcher
-The Array of Keywords represents the FSA implementation of the analyzer
-The length of each Keywords represents the length of each FSA
-instead of creating a bunch of if statements (which is not good in practice)
-Keywords are stored in a **char and it is only used in a manual character per character matching 
-against a input lexeme.
-Simulating a Deterministic Finite Automaton
-
-An input string: else 
-the algorithm of matchWithKeyword() function simulates an input token moving through each state:
-where each character of the Keyword represents a state.
-psuedocode:
->find appropriate State machine for the given input token (based on input length)
->if an appropriate State machine is found Match each Character of the input and the state 
-Example Keyword/State Machine: case
-Example input e
-is Matched against state c... recursive until rejected or accepted
-e c rejected 
->if rejected
->find another appropriate State machine 
-Next State Machine: else
-e e
-l l
-s s
-e e
-accepted
-> if accepted return to previous function to get next input
-> if all statemachines are tested and all are rejects the input then, it is thrown to 
-another set of state machines*/
 #pragma region Main Matcher
 //  prints the Token type based on keyword index from tokensID
 bool keywordType()
@@ -316,19 +285,7 @@ bool isNumeric(char ch) // Checks if current character is a digit via ASCII Valu
   return false;
 }
 // Might be edited for Automata :<
-bool manualMatching(char *c)
-{
-  //Manual Matching
-  // if
-  if (c[0] == 'i')
-    if (c[1] == 'f')
-      return true;
-  if (c[0] == 'e')
-    if (c[1] == 'l')
-      if (c[2] == 's')
-        if (c[3] == 'e')
-          return true;
-}
+
 bool matchWithKeywords(char *token) // Matches given input against a keyword, Matches each character one by one until rejected or accepted
 {                                   // printf("Token: %s", token);
   bool flag = false;
@@ -400,7 +357,7 @@ bool matchIfNumber(char *token) // Matches given input character one by one if i
   bool hasPeriod = false;
   bool flag = false;
   char c;
-  for (int i = 1; i < strlen(token); i++)
+  for (int i = 0; i < strlen(token); i++)
   {
     c = token[i];
     if (token[0] == '-' || isNumeric(token[0]) || (token[0] == '.' && strlen(token) > 1))

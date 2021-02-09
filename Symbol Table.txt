@@ -1,6 +1,15 @@
 Lexeme							Token
-Number 						Data Type
-x 						variableName
-= 						Relational Operator: assignment operator
-23 						integer
+if 						Conditional
+( 						Delimiter: open parenthesis
+one 						variableName
+AND 						Logical Operator
+two 						variableName
+) 						Delimiter: close parenthesis
+{ 						Delimiter: open curly bracket
+1 						integer
+* 						Arithmetic Operator: Multiply
+2 						integer
+* 						Arithmetic Operator: Multiply
+3 						integer
 ; 						Delimiter: semicolon
+} 						Delimiter: close curly bracket
