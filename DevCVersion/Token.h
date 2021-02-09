@@ -26,11 +26,11 @@ char **tokens; // Stores array of lexemes
 const int numberOfOperators = 15;
 // ~~ Pool Of Keywords Used in per-Character Matching ~~
 // reduced code length, ONLY USED IN PER-CHARACTER-MATCHING
-const int keywordsLength = 29;
-const char *keywords[29] = {"if", "else", "otherwise", "do", "while", "for", "switch", "case",
+const int keywordsLength = 31;
+const char *keywords[31] = {"if", "else", "otherwise", "do", "while", "for", "switch", "case",
                             "default", "stop", "resume", "none", "Number", "Sentence", "Tralse", "Collection", "Comp",
-                            "Item", "return", "AND", "OR", "NOT", "true", "false", "pi", "int32", "euler", "kelvin", "then"};
-const int keywordID[29] = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6, 6, 6, 6, 6, 6, 7, 8, 8, 8, 12, 13, 14, 15, 16, 17, 18}; // for printing purposes
+                            "Item", "return", "AND", "OR", "NOT", "true", "false", "pi", "int32", "euler", "kelvin", "then", "odd", "alphabet"};
+const int keywordID[31] = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6, 6, 6, 6, 6, 6, 7, 8, 8, 8, 12, 13, 14, 15, 16, 17, 18, 19, 20}; // for printing purposes
 //const char *operators[21] = {"+", "-", "*", "/", "!", "=", "==", "!=", ">", "<", ">=", "<=", "&&", "||", ";", "[", "]", "(", ")", "{", "}"}; // do something about the backslash
 //const int operatorID[21] = {9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11};
 
@@ -126,6 +126,12 @@ bool keywordType()
     return true;
   case 18:
     fprintf(wf, "noise word");
+    return true;
+  case 19:
+    fprintf(wf, "{1,3,5,7,9}");
+    return true;
+  case 20:
+    fprintf(wf, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
     return true;
   default:
     return false;
@@ -397,7 +403,8 @@ bool matchIfNumber(char *token) // Matches given input character one by one if i
   for (int i = 1; i < strlen(token); i++)
   {
     c = token[i];
-    if (token[0] == '-' || isNumeric(token[0]))
+    if (token[0] == '-' || isNumeric(token[0]) || (token[0] == '.' && strlen(token) > 1))
+    {
       if (isNumeric(c))
       {
         flag = true;
@@ -414,8 +421,19 @@ bool matchIfNumber(char *token) // Matches given input character one by one if i
           return false; //
         }
       }
+    }
   }
-  return flag;
+  if (hasPeriod && flag == true)
+  {
+    fprintf(wf, "float");
+    return flag;
+  }
+  if (flag == true)
+  {
+    fprintf(wf, "integer");
+    return true;
+  }
+  return false;
 }
 bool matchiIfVariableName(char *token) // Matches given input character one by one if it is a valid variableName
 {
@@ -464,7 +482,7 @@ void tokenMatcher(char *token)
 
   if (matchIfNumber(token))
   {
-    fprintf(wf, "Number");
+    // fprintf(wf, "Number");
     return;
   }
   if (matchWithKeywords(token))
@@ -570,7 +588,7 @@ void setToken(char *word)
     else
     {
       token[internalCounter] = c;
-      //    printf("%c %c\n", c, token[internalCounter]);
+      //printf("%c %c\n", c, token[internalCounter]);
       internalCounter++;
     }
   }

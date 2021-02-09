@@ -1,18 +1,6 @@
 Lexeme							Token
-Collection 						Data Type
-[ 						Delimiter: open square bracket
-Sentence 						Data Type
-] 						Delimiter: close square bracket
-collections 						variableName
+Number 						Data Type
+x 						variableName
 = 						Relational Operator: assignment operator
-{ 						Delimiter: open curly bracket
-"asdasdsa" 						Sentence
-, 						Delimiter: comma
-"asdasd da" 						Sentence
-, 						Delimiter: comma
-"213 123" 						Sentence
-, 						Delimiter: comma
-"qweqwe" 						Sentence
-, 						Delimiter: comma
-} 						Delimiter: close curly bracket
+23 						integer
 ; 						Delimiter: semicolon

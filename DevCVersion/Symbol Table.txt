@@ -1,45 +1,6 @@
 Lexeme							Token
 Number 						Data Type
-sample 						variableName
+x 						variableName
 = 						Relational Operator: assignment operator
-23 						Number
-. 						Undefined Symbol
-123 						Number
+23 						integer
 ; 						Delimiter: semicolon
-Collection 						Data Type
-[ 						Delimiter: open square bracket
-Number 						Data Type
-] 						Delimiter: close square bracket
-Samples 						variableName
-= 						Relational Operator: assignment operator
-{ 						Delimiter: open curly bracket
-2 						Number
-, 						Delimiter: comma
-3 						Number
-, 						Delimiter: comma
-4 						Number
-, 						Delimiter: comma
-5 						Number
-, 						Delimiter: comma
-6 						Number
-, 						Delimiter: comma
-7 						Number
-} 						Delimiter: close curly bracket
-; 						Delimiter: semicolon
-if 						Conditional
-( 						Delimiter: open parenthesis
-1 						Number
-== 						Relational Operator: equals to
-1 						Number
-) 						Delimiter: close parenthesis
-{ 						Delimiter: open curly bracket
-return 						Return Value
-true 						Tralse Constant: true
-; 						Delimiter: semicolon
-} 						Delimiter: close curly bracket
-else 						Conditional
-{ 						Delimiter: open curly bracket
-return 						Return Value
-false 						Tralse Constant: false
-; 						Delimiter: semicolon
-} 						Delimiter: close curly bracket
