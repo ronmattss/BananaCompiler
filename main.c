@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
-#include "headers/Token.h"
+//#include "headers/Token.h"
+#include "headers/FiniteMachines.h"
 
 void readSource();
 int SIZE_OF_LINE = 1000;
@@ -14,23 +15,24 @@ char **stringOfLine;
 int main()
 {
 
-    readSource();
-    //TODO: Cleanup
-    printf("Lexeme      Token");
-    tokens = malloc(MAXIMUM_TOKENS * sizeof(char));
-    for (int i = 0; i < numberOfLines; i++)
-    {
-        char *ptrTest = malloc((strlen(stringOfLine[i]) + 1) * sizeof *ptrTest);
-        strcpy(ptrTest, stringOfLine[i]);
-        // printf("\nfirst String: %s ", ptrTest);     // debug test what string
-        if(ptrTest[0] == '\n')
-        continue;
-        ReadLexeme(ptrTest);
-        free(ptrTest);
-    }
-    showLexemes();
-    free(tokens);
-    fclose(wf);
+    ReadString("++ -- + - * (){}[] \n  / +- = == < <= >= ");
+    // readSource();
+    // //TODO: Cleanup
+    // printf("Lexeme      Token");
+    // tokens = malloc(MAXIMUM_TOKENS * sizeof(char));
+    // for (int i = 0; i < numberOfLines; i++)
+    // {
+    //     char *ptrTest = malloc((strlen(stringOfLine[i]) + 1) * sizeof *ptrTest);
+    //     strcpy(ptrTest, stringOfLine[i]);
+    //     // printf("\nfirst String: %s ", ptrTest);     // debug test what string
+    //     if(ptrTest[0] == '\n')
+    //     continue;
+    //     ReadLexeme(ptrTest);
+    //     free(ptrTest);
+    // }
+    // showLexemes();
+    // free(tokens);
+    // fclose(wf);
     return 0;
 }
 

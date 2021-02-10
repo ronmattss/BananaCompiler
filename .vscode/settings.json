@@ -9,6 +9,8 @@
         "system_error": "c",
         "initializer_list": "c",
         "type_traits": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "string.h": "c",
+        "fstream": "cpp"
     }
 }

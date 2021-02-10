@@ -1,6 +1,8 @@
-Lexeme							Token
-Number 						Data Type
-x 						variableName
-= 						Relational Operator: assignment operator
-23 						integer
-; 						Delimiter: semicolon
+Keyword: Alphabet		
+Keyword: Alphabet		
+Keyword: Alphabet		
+Keyword: Alphabet		
+Keyword: Alphabet		
+Keyword: Alphabet		
+Keyword: Alphabet		
+Keyword: Alphabet		
