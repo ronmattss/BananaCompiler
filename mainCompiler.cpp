@@ -53,39 +53,7 @@ bool whiteSpace(char c)
     return false;
 }
 
-/*
-Alphabet [reserved word] X
-AND [keywords]           X
-Case [keywords]          X
-Collection [keywords]    X
-Comp [keywords]
-Default [keywords]
-Do [keywords]
-Else [keywords]
-Euler [reserved word]
-False [reserved word]
-For [keywords]
-If [keywords]
-Int32 [reserved word]
-Item [keywords]
-Kelvin [reserved word]
-None [reserved word]
-NOT [keywords]
-Number [keywords]
-Odd [reserved word]
-OR [keywords]
-Otherwise [keywords]
-Pi [reserved word]
-Resume [reserved word]
-Return [reserved word]
-Sentence [keywords]
-Stop [reserved word]
-Switch [keywords]
-Then [reserved word]
-Tralse [keywords]
-True [reserved word]
-While [keywords]
-*/
+
 
 int main()
 {
@@ -207,7 +175,7 @@ void ReadString(string input)
             }
             if (input[i] == '%')
             {
-                fprintf(wf, "Arithmetic Operator: Modulo\t\t\t\t\t\t%c\n", input[i]);
+                fprintf(wf, "Arithmetic Operator: Modulo\t\t\t\t\t%c\n", input[i]);
                 continue;
             }
             if (input[i] == '/' && (whiteSpace(input[i + 1]) || input[i + 1] != '/'))
@@ -251,7 +219,7 @@ void ReadString(string input)
                 if (input[i + 1] == '=') // peek
                 {
                     ++i;
-                    fprintf(wf, "Relational Operator: Greater Than equal to\t\t%c%c\n", input[i - 1], input[i]);
+                    fprintf(wf, "Relational Operator: Greater Than equal to\t\t\t%c%c\n", input[i - 1], input[i]);
                     continue;
                 }
 
@@ -267,7 +235,7 @@ void ReadString(string input)
                     continue;
                 }
 
-                fprintf(wf, "Logical Operator: Not\t\t\t\t%c\n", input[i]);
+                fprintf(wf, "Logical Operator: Not\t\t\t\t\t\t%c\n", input[i]);
                 continue;
             }
             if (input[i] == '&')
@@ -275,7 +243,7 @@ void ReadString(string input)
                 if (input[i + 1] == '&') // peek
                 {
                     ++i;
-                    fprintf(wf, "Logical Operator: And\t\t%c%c\n", input[i - 1], input[i]);
+                    fprintf(wf, "Logical Operator: And\t\t\t\t\t\t%c%c\n", input[i - 1], input[i]);
                     continue;
                 }
             }
@@ -284,7 +252,7 @@ void ReadString(string input)
                 if (input[i + 1] == '|') // peek
                 {
                     ++i;
-                    fprintf(wf, "Logical Operator: Or\t\t%c%c\n", input[i - 1], input[i]);
+                    fprintf(wf, "Logical Operator: Or\t\t\t\t\t\t%c%c\n", input[i - 1], input[i]);
                     continue;
                 }
             }
@@ -293,7 +261,7 @@ void ReadString(string input)
                 if (input[i + 1] == '=') // peek
                 {
                     ++i;
-                    fprintf(wf, "Relational Operator: Less Than equal to\t\t\t%c%c\n", input[i - 1], input[i]);
+                    fprintf(wf, "Relational Operator: Less Than equal to\t\t\t\t%c%c\n", input[i - 1], input[i]);
                     continue;
                 }
 
@@ -330,7 +298,7 @@ void ReadString(string input)
                     printString += input[i];
                     ++i;
                 }
-                fprintf(wf, "Comment:\t\t\t\t\t\t\t\t\t\t%s\n", printString.c_str());
+                fprintf(wf, "Comment:\t\t\t\t\t\t\t%s\n", printString.c_str());
             }
         }
         // if Multi Line Content
@@ -345,7 +313,7 @@ void ReadString(string input)
                 ++i;
             }
             printString += input[i];
-            fprintf(wf, "Multi Line Comment: \t\t\t\t\t\t\t\t%s\n", printString.c_str());
+            fprintf(wf, "Multi Line Comment: \t\t\t\t\t\t%s\n", printString.c_str());
             continue;
         }
         // if Sentence literal
@@ -359,7 +327,7 @@ void ReadString(string input)
                 printString += input[i];
                 ++i;
             }
-            fprintf(wf, "Sentence Literal: \t\t\t\t\t\t\t\t%s\n", printString.c_str());
+            fprintf(wf, "Sentence Literal: \t\t\t\t\t\t%s\n", printString.c_str());
             continue;
         }
 
@@ -387,11 +355,11 @@ void ReadString(string input)
             }
             if (hasPeriod)
             {
-                fprintf(wf, "Numeric: float\t\t%s\n", printString.c_str());
+                fprintf(wf, "Numeric: float\t\t\t\t\t\t\t%s\n", printString.c_str());
             }
             else
             {
-                fprintf(wf, "Numeric: int\t\t%s\n", printString.c_str());
+                fprintf(wf, "Numeric: int\t\t\t\t\t\t\t%s\n", printString.c_str());
             }
             --i;
         }
@@ -424,7 +392,7 @@ void ReadString(string input)
                                     if (printString[6] == 'e')
                                         if (printString[7] == 't' && printString[8] == '\0') // final state
                                         {
-                                            fprintf(wf, "Reserved Word: Alphabet\t\t\t\t\t\t\t%s\n", printString.c_str());
+                                            fprintf(wf, "Reserved Word: Alphabet\t\t\t\t\t\t%s\n", printString.c_str());
                                             continue;
                                         }
                 }
@@ -437,7 +405,7 @@ void ReadString(string input)
                     if (printString[2] == 's')
                         if (printString[3] == 'e' && printString[4] == '\0')
                         {
-                            fprintf(wf, "Keyword: case\t\t\t\t\t\t\t\t\t%s\n", printString.c_str());
+                            fprintf(wf, "Keyword: case\t\t\t\t\t\t\t%s\n", printString.c_str());
                             continue;
                         }
                 }
@@ -447,7 +415,7 @@ void ReadString(string input)
                     {
                         if (printString[3] == 'p' && printString[4] == '\0')
                         {
-                            fprintf(wf, "Keywords: Comp\t\t\t\t\t\t\t\t\t%s\n", printString.c_str());
+                            fprintf(wf, "Keywords: Comp\t\t\t\t\t\t\t%s\n", printString.c_str());
                             continue;
                         }
                     }
@@ -524,7 +492,7 @@ void ReadString(string input)
                         {
                             if (printString[4] == 'r' && printString[5] == '\0')
                             {
-                                fprintf(wf, "euler Constant: 2.71828\t\t\t\t\t\t\t%s\n", printString.c_str());
+                                fprintf(wf, "euler Constant: 2.71828\t\t\t\t\t\t%s\n", printString.c_str());
                                 continue;
                             }
                         }
@@ -580,7 +548,7 @@ void ReadString(string input)
             {
                 if (printString[1] == 'f' && printString[2] == '\0')
                 {
-                    fprintf(wf, "Keyword: Flow Control: if\t\t\t\t\t\t%s\n", printString.c_str());
+                    fprintf(wf, "Keyword: Flow Control: if\t\t\t\t\t%s\n", printString.c_str());
                     continue;
                 }
 
@@ -613,7 +581,7 @@ void ReadString(string input)
                             {
                                 if (printString[5] == 'n' && printString[6] == '\0')
                                 {
-                                    fprintf(wf, "Constant Value: 273\t\t\t\t\t\t\t\t%s\n", printString.c_str());
+                                    fprintf(wf, "Constant Value: 273\t\t\t\t\t\t%s\n", printString.c_str());
                                     continue;
                                 }
                             }
@@ -689,7 +657,7 @@ void ReadString(string input)
                 {
                     if (printString[2] == 'd' && printString[3] == '\0')
                     {
-                        fprintf(wf, "Constant Value: 1,3,5,7,9\t\t\t\t\t\t%s\n", printString.c_str());
+                        fprintf(wf, "Constant Value: 1,3,5,7,9\t\t\t\t\t%s\n", printString.c_str());
                         continue;
                     }
                 }
@@ -701,7 +669,7 @@ void ReadString(string input)
             {
                 if (printString[1] == 'i' && printString[2] == '\0')
                 {
-                    fprintf(wf, "Constant Value: 3.14\t\t\t\t\t\t\t%s\n", printString.c_str());
+                    fprintf(wf, "Constant Value: 3.14\t\t\t\t\t\t%s\n", printString.c_str());
                     continue;
                 }
             }
@@ -720,7 +688,7 @@ void ReadString(string input)
                             {
                                 if (printString[5] == 'e' && printString[6] == '\0')
                                 {
-                                    fprintf(wf, "Reserved Word: Iteration Control: resume\t\t%s\n", printString.c_str());
+                                    fprintf(wf, "Reserved Word: Iteration Control: resume\t\t\t%s\n", printString.c_str());
                                     continue;
                                 }
                             }
@@ -734,7 +702,7 @@ void ReadString(string input)
                             {
                                 if (printString[5] == 'n' && printString[6] == '\0')
                                 {
-                                    fprintf(wf, "Reserved Word: return\t\t\t\t\t\t\t%s\n", printString.c_str());
+                                    fprintf(wf, "Reserved Word: return\t\t\t\t\t\t%s\n", printString.c_str());
                                     continue;
                                 }
                             }
@@ -780,7 +748,7 @@ void ReadString(string input)
                     {
                         if (printString[3] == 'p' && printString[4] == '\0')
                         {
-                            fprintf(wf, "Reserved Word: Iteration Control: stop\t\t\t%s\n", printString.c_str());
+                            fprintf(wf, "Reserved Word: Iteration Control: stop\t\t\t\t%s\n", printString.c_str());
                             continue;
                         }
                     }
@@ -813,7 +781,7 @@ void ReadString(string input)
                     {
                         if (printString[3] == 'n' && printString[4] == '\0')
                         {
-                            fprintf(wf, "Noise Word: then\t\t\t\t\t\t\t\t%s\n", printString.c_str());
+                            fprintf(wf, "Noise Word: then\t\t\t\t\t\t%s\n", printString.c_str());
                             continue;
                         }
                     }
@@ -900,7 +868,7 @@ void ReadString(string input)
                 }
                 if (isAnIdentifier)
                 {
-                    fprintf(wf, "Identifier\t\t\t\t\t\t\t\t\t\t%s\n", printString.c_str());
+                    fprintf(wf, "Identifier\t\t\t\t\t\t\t%s\n", printString.c_str());
                 }
                 else
                 {
