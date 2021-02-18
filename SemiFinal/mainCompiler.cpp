@@ -269,7 +269,7 @@ void ReadString(string input)
                     continue;
                 }
 
-                fprintf(wf, "Assignment Operator: equal\t\t\t\t\t%c\n", input[i]);
+                fprintf(wf, "Assignment Operator: equal\t\t%c\n", input[i]);
                 continue;
             }
             // CONDITIONAL AND OR NOT??? REVERT TO && ! ||
