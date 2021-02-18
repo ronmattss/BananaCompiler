@@ -53,8 +53,6 @@ bool whiteSpace(char c)
     return false;
 }
 
-
-
 int main()
 {
     string stringInput = "123.31AND A23 +qw!e";
@@ -111,6 +109,13 @@ bool isNumeric(char ch) // Checks if current character is a digit via ASCII Valu
 bool isDelimiter(char ch)
 {
     if (ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == ';' || ch == ',')
+        return (true);
+    return (false);
+}
+bool isOperator(char ch)
+{
+    if (ch == '!' || ch == '+' || ch == '-' || ch == '=' || ch == '/' || ch == '|' || ch == '*' || ch == '%'
+     || ch == '<'|| ch == '>'|| ch == '&')
         return (true);
     return (false);
 }
@@ -369,13 +374,16 @@ void ReadString(string input)
         {
             // reset printString:
             printString = "";
-            for (i; (!isAlphabet(input[i]) || !isNumeric(input[i])); i++) // Reads each character while a special case is not detected
+            for (i; !whiteSpace(input[i]) || !isDelimiter(input[i]) || !isOperator(input[i]); i++) // Reads each character while a special case is not detected //(!isAlphabet(input[i]) || !isNumeric(input[i]))
             {
-                if (isAlphabet(input[i]) || isNumeric(input[i]))
-                    printString += input[i];
+                if (whiteSpace(input[i]) || isDelimiter(input[i]) || isOperator(input[i])) //isAlphabet(input[i]) || isNumeric(input[i])
+                {
+                    break;
+                }
                 else
                 {
-                    --i; // this means that if not acceptable keyword revert to read that again
+                    printString += input[i]; // this means that if not acceptable keyword revert to read that again
+                    if (whiteSpace(input[i+1]) || isDelimiter(input[i+1]) || isOperator(input[i+1]))
                     break;
                 }
             }
@@ -708,6 +716,12 @@ void ReadString(string input)
                             }
                         }
                     }
+                    else if (printString[2] = 'a')
+                    {
+                        if (printString[3] = 'd' && printString[4] == '\0')
+                            fprintf(wf, "Reserved Word: read\t\t\t\t\t\tread\n");
+                            continue;
+                    }
                 }
             }
 
@@ -830,13 +844,23 @@ void ReadString(string input)
                     {
                         if (printString[3] == 'l')
                         {
-                            if (printString[4] == 'e')
+                            if (printString[4] == 'e' && printString[5] == '\0')
                             {
                                 fprintf(wf, "Keyword: Iteration Control: while\t\t\t\t%s\n", printString.c_str());
                                 continue;
                             }
                         }
                     }
+                }
+                else if (printString[1] == 'r')
+                {
+                    if (printString[2] == 'i')
+                        if (printString[3] == 't')
+                            if (printString[4] == 'e' && printString[5] == '\0')
+                            {
+                                fprintf(wf, "Reserved word: write\t\t\t\t%s\n", printString.c_str());
+                                continue;
+                            }
                 }
             }
 
@@ -869,10 +893,14 @@ void ReadString(string input)
                 if (isAnIdentifier)
                 {
                     fprintf(wf, "Identifier\t\t\t\t\t\t\t%s\n", printString.c_str());
+                    continue;
                 }
                 else
                 {
                     fprintf(wf, "Unknown Symbol\t\t\t\t\t\t\t\t%s\n", printString.c_str());
+                    printf("Unknown Symbol\t\t\t\t\t\t\t\t%s\n", printString.c_str());
+
+                    continue;
                 }
             }
         }

@@ -1,72 +1,9 @@
-Comment:							//WEEEEEEEE
-Noise Word: then						then
-Keyword: Flow Control: if					if
-Delimiter: open parenthesis    					(
-Identifier							two
-Identifier							AND
-Identifier							two
-Delimiter: close parenthesis   					)
-Delimiter: open curly bracket  					{
-Delimiter: close curly bracket 					}
-Delimiter: open square bracket 					[
-Delimiter: close square bracket					]
-Delimiter: open parenthesis    					(
-Delimiter: close parenthesis   					)
+Identifier							qweqweq
 Arithmetic Operator: Increment					++
+Comment:							//qwqweeqweqw
+Delimiter: open parenthesis    					(
+Identifier							qweqwewq
+Numeric: int							1
 Arithmetic Operator: Addition					+
-Arithmetic Operator: Decrement					--
-Arithmetic Operator: Subtraction				-
-Arithmetic Operator: Division					/
-Arithmetic Operator: Modulo					%
-Arithmetic Operator: Multiply					*
-Relational Operator: Less Than equal to				<=
-Relational Operator: Greater Than equal to			>=
-Relational Operator: Less Than					<
-Relational Operator: Greater Than				>
-Keyword: Iteration Control: while				while
-Keywords: Iteration Control: do					do
-Keyword: Flow Control: if					if
-Keyword: Flow Control: otherwise				otherwise
-Reserved Word: Iteration Control: stop				stop
-Keywords: Flow Control: else					else
-Reserved Word: Alphabet						Alphabet
-Identifier							AND
-Keyword: case							case
-Keywords: Comp							comp
-Keyword: Data type: Collection					Collection
-Keywords: Flow Control: default					default
-Keywords: Flow Control: else					else
-euler Constant: 2.71828						euler
-Reserved Word: Tralse Value: false				false
-Keyword: Iteration Control: for					for
-Reserved Word: Data type: Item					Item
-Keyword: Flow Control: if					if
-Constant Value: 2,147,483,647					int32
-Constant Value: 273						kelvin
-Reserved Word: Null Value: None					None
-Identifier							NOT
-Reserved Word: Data Type: Number				Number
-Reserved Word: Iteration Control: resume			resume
-Constant Value: 1,3,5,7,9					odd
-Identifier							OR
-Keyword: Flow Control: otherwise				otherwise
-Constant Value: 3.14						pi
-Reserved Word: Iteration Control: resume			resume
-Reserved Word: return						return
-Reserved Word: Data Type: Sentence				Sentence
-Reserved Word: Iteration Control: stop				stop
-Keyword: Flow Control: switch					switch
-Noise Word: then						then
-Reserved Word: Tralse Value: true				true
-Reserved Word: Data type: Tralse				Tralse
-Keyword: Iteration Control: while				while
-Identifier							NOT
-Identifier							two
-Identifier							OR
-Sentence Literal: 						qweqwe
-Logical Operator: Or						||
-Logical Operator: And						&&
-Logical Operator: Not						!
-Relational Operator: Not equal to				!=
-Multi Line Comment: 						~Apparently this is 
-true LMAO ~
+Numeric: int							2
+Delimiter: close parenthesis   					)
