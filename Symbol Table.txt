@@ -4,7 +4,7 @@ Noise Word: then						then
 Keyword: Flow Control: if					if
 Delimiter: open parenthesis    					(
 Identifier							two
-Identifier							AND
+Logical Operator: And						&&
 Identifier							two
 Delimiter: close parenthesis   					)
 Delimiter: open curly bracket  					{
@@ -24,6 +24,11 @@ Relational Operator: Less Than equal to				<=
 Relational Operator: Greater Than equal to			>=
 Relational Operator: Less Than					<
 Relational Operator: Greater Than				>
+Logical Operator: Or						||
+Logical Operator: And						&&
+Logical Operator: Not						!
+Relational Operator: Not equal to				!=
+Relational Operator:  equal to					==
 Keyword: Iteration Control: while				while
 Keywords: Iteration Control: do					do
 Keyword: Flow Control: if					if
@@ -60,23 +65,17 @@ Reserved Word: Tralse Value: true				true
 Reserved Word: Data type: Tralse				Tralse
 Keyword: Iteration Control: while				while
 Reserved word: write						write
-Identifier							NOT
 Identifier							two
-Identifier							OR
 Sentence Literal: 						qweqwe
 Identifier							qwe23_eqw
 Identifier							qweqwewq
 Comment:							//qweqweqweqw
 Unknown Symbol								qwe~ewqwe
-Logical Operator: Or						||
-Logical Operator: And						&&
-Logical Operator: Not						!
-Relational Operator: Not equal to				!=
 Multi Line Comment: 						~Apparently this is 
 true LMAO ~
 Reserved Word: Data Type: Number				Number
 Identifier							x
-Assignment Operator: equal		=
+Assignment Operator: equal					=
 Numeric: float							23.423
 Delimiter: semicolon           					;
 Keyword: Flow Control: if					if
@@ -87,7 +86,7 @@ Numeric: int							23
 Delimiter: close parenthesis   					)
 Delimiter: open curly bracket  					{
 Identifier							x
-Assignment Operator: equal		=
+Assignment Operator: equal					=
 Numeric: int							40
 Delimiter: semicolon           					;
 Delimiter: close curly bracket 					}
@@ -99,14 +98,14 @@ Numeric: int							12
 Delimiter: close parenthesis   					)
 Delimiter: open curly bracket  					{
 Identifier							x
-Assignment Operator: equal		=
+Assignment Operator: equal					=
 Numeric: int							0
 Delimiter: semicolon           					;
 Delimiter: close curly bracket 					}
 Keywords: Flow Control: else					else
 Delimiter: open curly bracket  					{
 Identifier							x
-Assignment Operator: equal		=
+Assignment Operator: equal					=
 Numeric: int							4
 Delimiter: semicolon           					;
 Delimiter: close curly bracket 					}
@@ -114,7 +113,7 @@ Keyword: Iteration Control: for					for
 Delimiter: open parenthesis    					(
 Reserved Word: Data Type: Number				Number
 Identifier							i
-Assignment Operator: equal		=
+Assignment Operator: equal					=
 Numeric: int							0
 Delimiter: semicolon           					;
 Identifier							i

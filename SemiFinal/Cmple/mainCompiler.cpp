@@ -53,6 +53,7 @@ int main()
     }
 
     ReadString(stringInput);
+    printf("Output file: Symbol Table.txt");
     return 0;
 }
 bool whiteSpace(char c)
@@ -71,13 +72,9 @@ bool whiteSpace(char c)
     return false;
 }
 bool isAlphabet(char ch) // Checks if current character is an alphabet via ASCII Value
-{    //if (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z')
-    if (ch == 'a' || ch == 'b' || ch == 'c' || ch == 'd' || ch == 'e' || ch == 'f' || ch == 'g' || ch == 'h' || ch == 'i' || ch == 'j' || ch == 'k' ||
-        ch == 'l' || ch == 'm' || ch == 'n' || ch == 'o' || ch == 'p' || ch == 'q' || ch == 'r' || ch == 's' ||
-        ch == 't' || ch == 'u' || ch == 'v' || ch == 'w' || ch == 'x' || ch == 'y' || ch == 'z' || ch == 'A' ||
-        ch == 'B' || ch == 'C' || ch == 'D' || ch == 'E' || ch == 'F' || ch == 'G' || ch == 'H' || ch == 'I' ||
-        ch == 'J' || ch == 'K' || ch == 'L' || ch == 'M' || ch == 'N' || ch == 'O' || ch == 'P' || ch == 'Q' ||
-        ch == 'R' || ch == 'S' || ch == 'T' || ch == 'U' || ch == 'V' || ch == 'W' || ch == 'X' || ch == 'Y' || ch == 'Z')
+{   
+
+     if (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z')
     {
         return true;
     }
@@ -85,8 +82,8 @@ bool isAlphabet(char ch) // Checks if current character is an alphabet via ASCII
 }
 bool isNumeric(char ch) // Checks if current character is a digit via ASCII Value
 {
-    //if (ch >= '0' && ch <= '9')
-    if (ch == '1' || ch == '2' || ch == '3' || ch == '4' || ch == '5' || ch == '6' || ch == '7' || ch == '8' || ch == '9' || ch == '0')
+    if (ch >= '0' && ch <= '9')
+   
     {
         //  printf("%c  character is digit True", ch);
         return true;
@@ -265,11 +262,11 @@ void ReadString(string input)
                 if (input[i + 1] == '=') // peek
                 {
                     ++i;
-                    fprintf(wf, "Relational Operator:  equal to\t\t%c%c\n", input[i - 1], input[i]);
+                    fprintf(wf, "Relational Operator:  equal to\t\t\t\t\t%c%c\n", input[i - 1], input[i]);
                     continue;
                 }
 
-                fprintf(wf, "Assignment Operator: equal\t\t%c\n", input[i]);
+                fprintf(wf, "Assignment Operator: equal\t\t\t\t\t%c\n", input[i]);
                 continue;
             }
             // CONDITIONAL AND OR NOT??? REVERT TO && ! ||
@@ -410,7 +407,7 @@ void ReadString(string input)
                     {
                         if (printString[3] == 'p' && printString[4] == '\0')
                         {
-                            fprintf(wf, "Keywords: Comp\t\t\t\t\t\t\t%s\n", printString.c_str());
+                            fprintf(wf, "Keywords: comp\t\t\t\t\t\t\t%s\n", printString.c_str());
                             continue;
                         }
                     }
